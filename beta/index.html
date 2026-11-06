@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Test Uninterrupted</title>
+  <meta name="description" content="Help test Uninterrupted, a simple meditation app for iPhone and Apple Watch, before its public release.">
+  <meta name="color-scheme" content="light">
+  <meta property="og:title" content="Test Uninterrupted">
+  <meta property="og:description" content="Help test Uninterrupted, a simple meditation app for iPhone and Apple Watch.">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="../favicon.png">
+  <style>
+    :root {
+      --bg: #f5f3ef;
+      --card: #ffffff;
+      --text: #2e3a3f;
+      --muted: #6b6f72;
+      --plum: #6b3fa0;
+      --coral: #d4566e;
+      --rule: #e2ded5;
+      color-scheme: light;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 17px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    }
+    main { max-width: 620px; margin: 0 auto; padding: 56px 16px 64px; }
+    .hero { text-align: center; margin-bottom: 40px; }
+    .hero .icon { width: 112px; height: 112px; }
+    h1, h2 { font-family: ui-rounded, -apple-system, BlinkMacSystemFont, sans-serif; font-weight: 700; }
+    h1 { font-size: 2.2rem; margin: 20px 0 4px; letter-spacing: -0.01em; }
+    .tagline { color: var(--muted); margin: 0; }
+    h2 { font-size: 1.3rem; margin: 44px 0 16px; }
+    p { margin: 0 0 14px; }
+    ol { list-style: none; padding: 0; margin: 0; counter-reset: step; }
+    .step {
+      counter-increment: step;
+      display: flex; align-items: flex-start; gap: 16px;
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-radius: 20px;
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+    .step .icon { width: 64px; height: 64px; flex: none; }
+    .step-body { flex: 1; min-width: 0; }
+    .step-body::before {
+      content: "Step " counter(step);
+      display: block;
+      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+      color: var(--muted);
+    }
+    .step h3 { font-size: 1.05rem; margin: 0 0 10px; }
+    .button {
+      display: inline-block;
+      padding: 10px 22px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #6b3fa0, #d4566e);
+      color: #fff;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .button.secondary { background: #0a84ff; }
+    .note { color: var(--muted); font-size: 0.95rem; }
+    .step h3 + .note { margin-top: -6px; }
+    a { color: var(--plum); }
+    footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--rule); color: var(--muted); font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <header class="hero">
+      <img class="icon" src="../icon.svg" alt="Uninterrupted app icon">
+      <h1>Uninterrupted</h1>
+      <p class="tagline">A meditation timer for iPhone and Apple Watch</p>
+    </header>
+
+    <section class="story">
+      <p>Uninterrupted is an idea I've had in my head for more than fifteen years, and I'm pretty excited to
+        finally see it come to life.</p>
+      <p>The idea is simple: <em>Just record how long you meditate</em>.</p>
+      <p>Every meditation app is filled with gongs, ambient sound, or narration. Almost all of them require an
+        account or a subscription to get started. Pretty much all bury the simple act of sitting down behind
+        menus and settings.</p>
+      <p>Uninterrupted takes the opposite approach. It is a quiet, simple way to record your practice, however
+        you practice. Tap Begin, meditate, and tap Done when you're finished. No sounds, no prompts, no
+        interruptions.</p>
+      <p>Will this make money? Probably not, but that was never the goal.</p>
+    </section>
+
+    <h2>How to test it</h2>
+    <p>I'd be grateful for your help in testing this app before public release.</p>
+    <ol>
+      <li class="step">
+        <img class="icon" src="testflight.webp" alt="TestFlight icon">
+        <div class="step-body">
+          <h3>Download TestFlight</h3>
+          <p class="note">Ignore redeem code prompt</p>
+          <a class="button secondary" href="https://apps.apple.com/app/testflight/id899247664">Open in App Store</a>
+        </div>
+      </li>
+      <li class="step">
+        <img class="icon" src="../icon.svg" alt="Uninterrupted app icon">
+        <div class="step-body">
+          <h3>Join the Beta of Uninterrupted</h3>
+          <a class="button" href="https://testflight.apple.com/join/8NFs6thQ">Install Uninterrupted</a>
+        </div>
+      </li>
+    </ol>
+    <p class="note">Open this page on your iPhone so the buttons go straight to TestFlight. If you have an
+      Apple Watch, the watch app installs along with it—which is the real reason this app exists! 😉</p>
+
+    <h2>Tell me what you think</h2>
+    <p>Anything that's confusing, broken, or just feels off is helpful. In TestFlight you can take a screenshot
+      in the app to send feedback, or text me directly.</p>
+
+    <footer><a href="../">Uninterrupted</a> · Corbin Hesse · <a href="../privacy/">Privacy policy</a></footer>
+  </main>
+</body>
+</html>

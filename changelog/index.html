@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Uninterrupted Changelog</title>
+  <meta name="description" content="What changed in each TestFlight build of Uninterrupted, a meditation app for iPhone and Apple Watch.">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f8f1ff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0b0820" media="(prefers-color-scheme: dark)">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="../favicon.png">
+  <style>
+    /* The home page's sky and colors (see ../index.html): dawn in light mode, dusk in dark mode.
+       The cards stay white in both, with the dawn colors inside. */
+    :root {
+      --sky: linear-gradient(#f8f1ff 0%, #fbeaf6 42%, #ffe8da 78%, #fff4ea 100%);
+      --glow-core: rgb(255 150 60 / 0.65);
+      --glow-halo: rgb(255 115 75 / 0.35);
+      --glow-edge: rgb(255 115 75 / 0);
+      --text: #2e3a3f;
+      --muted: #5f6366;
+      --logo: #4a2a7a;
+      --accent: #6b3fa0;
+      --card: #ffffff;
+      --card-text: #2e3a3f;
+      --card-muted: #5f6366;
+      --card-heading: #4a2a7a;
+      --card-accent: #6b3fa0;
+      --card-rule: rgb(107 63 160 / 0.14);
+      --card-shadow: 0 1px 2px rgb(74 42 122 / 0.06), 0 8px 24px rgb(74 42 122 / 0.08);
+      color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --sky: linear-gradient(#0b0820 0%, #24174f 34%, #4a2a82 62%, #8a3e8e 84%, #c45d8c 100%);
+        --glow-core: rgb(255 196 150 / 0.75);
+        --glow-halo: rgb(255 140 140 / 0.35);
+        --glow-edge: rgb(255 140 140 / 0);
+        --text: #ffffff;
+        --muted: rgb(255 255 255 / 0.72);
+        --logo: #ffffff;
+        --accent: #ffb9c8;
+        --card-shadow: 0 1px 2px rgb(11 8 32 / 0.2), 0 8px 24px rgb(11 8 32 / 0.3);
+        color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #f8f1ff;
+      color: var(--text);
+      font: 17px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    }
+    @media (prefers-color-scheme: dark) { body { background: #0b0820; } }
+    /* A fixed layer rather than background-attachment: fixed, which iOS Safari ignores. */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(circle 650px at 50% calc(100% + 184px),
+          var(--glow-core) 0, var(--glow-halo) 260px, var(--glow-edge) 455px),
+        var(--sky);
+    }
+    main { max-width: 680px; margin: 0 auto; padding: 48px 16px 64px; }
+    /* The home page's logo, a mask so it takes the logo color: deep plum on dawn, white on dusk. */
+    .logo {
+      display: block;
+      width: 72px;
+      aspect-ratio: 337.03 / 151;
+      margin: 0 0 20px;
+      background: var(--logo);
+      -webkit-mask: url(../logo.svg) center / contain no-repeat;
+      mask: url(../logo.svg) center / contain no-repeat;
+    }
+    h1, h2, h3 { font-family: ui-rounded, "SF Pro Rounded", -apple-system, BlinkMacSystemFont, sans-serif; }
+    h1 { font-size: 2rem; font-weight: 600; margin: 0 0 4px; color: var(--logo); }
+    .intro { color: var(--muted); margin: 0 0 32px; }
+    .build {
+      background: var(--card);
+      color: var(--card-text);
+      border-radius: 20px;
+      box-shadow: var(--card-shadow);
+      padding: 24px;
+      margin: 0 0 20px;
+    }
+    .build h2 { font-size: 1.3rem; font-weight: 700; margin: 0; color: var(--card-heading); }
+    .build .when { color: var(--card-muted); font-size: 0.95rem; margin: 0 0 4px; }
+    .build h3 {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--card-accent);
+      margin: 20px 0 8px;
+      padding-top: 16px;
+      border-top: 1px solid var(--card-rule);
+    }
+    .build p, .build li { margin: 0 0 8px; }
+    .build ul { margin: 0; padding-left: 1.2em; }
+    .build li::marker { color: var(--card-accent); }
+    .build > :last-child { margin-bottom: 0; }
+    a { color: var(--accent); }
+    footer { margin-top: 48px; color: var(--muted); font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="logo" href="../" aria-label="Uninterrupted"></a>
+    <h1>Changelog</h1>
+    <p class="intro">What changed in each TestFlight build of Uninterrupted, newest first.</p>
+
+    <section class="build">
+      <h2>Version 0.41.5</h2>
+      <p class="when">Build 3 · October 29, 2026</p>
+      <h3>Features</h3>
+      <ul>
+        <li>In the introduction, the heart button now stays in place on the way to the last page, and its heart draws itself into the Begin icon instead of the button dropping off the screen.</li>
+      </ul>
+      <h3>Fixes</h3>
+      <ul>
+        <li>On the Apple Watch, “Uninterrupted” on the workout card in the Smart Stack is lilac instead of green.</li>
+        <li>On the Apple Watch, the clock at the top of the session screen is centered again on watchOS 27.</li>
+        <li>On the Apple Watch, the X on Done now turns into the check right at one minute, not a few seconds late.</li>
+        <li>On the Apple Watch, the heart rate no longer shows during a session if Apple Health access was turned off.</li>
+        <li>The session timer on the Lock Screen and in the Dynamic Island now uses the same rounded font as the timer in the app.</li>
+      </ul>
+    </section>
+
+    <section class="build">
+      <h2>Version 0.40.0</h2>
+      <p class="when">Build 2 · October 27, 2026</p>
+      <h3>Features</h3>
+      <ul>
+        <li>New Apple Watch complication: the sunrise logo opens Uninterrupted, ready to Begin. Add it to a watch face from the face’s Edit screen.</li>
+      </ul>
+      <h3>Fixes</h3>
+      <ul>
+        <li>A session you end on Apple Watch now ends on your iPhone too, even if the iPhone was locked, and is saved to Apple Health once instead of twice.</li>
+      </ul>
+    </section>
+
+    <section class="build">
+      <h2>Version 0.39.1</h2>
+      <p class="when">Build 1 · October 27, 2026</p>
+      <h3>Fixes</h3>
+      <ul>
+        <li>Fixes the build so it can be sent through TestFlight.</li>
+      </ul>
+    </section>
+
+    <footer><a href="../">Uninterrupted</a> · Corbin Hesse · <a href="../privacy/">Privacy policy</a></footer>
+  </main>
+</body>
+</html>

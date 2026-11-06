@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Uninterrupted Privacy Policy</title>
+  <meta name="description" content="Privacy policy for Uninterrupted, a meditation app for iPhone and Apple Watch.">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f8f1ff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0b0820" media="(prefers-color-scheme: dark)">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="../favicon.png">
+  <style>
+    /* The home page's sky and colors (see ../index.html): dawn in light mode, dusk in dark mode. */
+    :root {
+      --sky: linear-gradient(#f8f1ff 0%, #fbeaf6 42%, #ffe8da 78%, #fff4ea 100%);
+      --glow-core: rgb(255 150 60 / 0.65);
+      --glow-halo: rgb(255 115 75 / 0.35);
+      --glow-edge: rgb(255 115 75 / 0);
+      --text: #2e3a3f;
+      --muted: #5f6366;
+      --logo: #4a2a7a;
+      --accent: #6b3fa0;
+      --rule: rgb(107 63 160 / 0.14);
+      color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --sky: linear-gradient(#0b0820 0%, #24174f 34%, #4a2a82 62%, #8a3e8e 84%, #c45d8c 100%);
+        --glow-core: rgb(255 196 150 / 0.75);
+        --glow-halo: rgb(255 140 140 / 0.35);
+        --glow-edge: rgb(255 140 140 / 0);
+        --text: #ffffff;
+        --muted: rgb(255 255 255 / 0.72);
+        --logo: #ffffff;
+        --accent: #ffb9c8;
+        --rule: rgb(255 255 255 / 0.16);
+        color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #f8f1ff;
+      color: var(--text);
+      font: 17px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    }
+    @media (prefers-color-scheme: dark) { body { background: #0b0820; } }
+    /* A fixed layer rather than background-attachment: fixed, which iOS Safari ignores. */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(circle 650px at 50% calc(100% + 184px),
+          var(--glow-core) 0, var(--glow-halo) 260px, var(--glow-edge) 455px),
+        var(--sky);
+    }
+    main { max-width: 680px; margin: 0 auto; padding: 48px 16px 64px; }
+    h1, h2 { font-family: ui-rounded, "SF Pro Rounded", -apple-system, BlinkMacSystemFont, sans-serif; color: var(--logo); }
+    h1 { font-size: 2rem; font-weight: 600; margin: 0 0 4px; }
+    h2 { font-size: 1.15rem; font-weight: 700; margin: 36px 0 8px; }
+    p, li { margin: 0 0 12px; }
+    ul { padding-left: 1.2em; }
+    .updated { color: var(--muted); margin-bottom: 28px; }
+    .summary { border-left: 3px solid var(--accent); padding: 4px 0 4px 16px; }
+    a { color: var(--accent); }
+    footer { margin-top: 56px; color: var(--muted); font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Uninterrupted Privacy Policy</h1>
+    <p class="updated">Effective October 25, 2026</p>
+
+    <p class="summary">Uninterrupted does not collect any data. Everything the app records stays on your
+      iPhone, on your Apple Watch and in Apple Health, under your control. The app has no accounts, no analytics, no
+      advertising, and does not connect to the internet.</p>
+
+    <p>This policy explains what Uninterrupted, a meditation app for iPhone and Apple Watch made by Corbin Hesse,
+      does with information about you.</p>
+
+    <h2>What the app stores on your iPhone</h2>
+    <ul>
+      <li><strong>Your sessions.</strong> When you finish a meditation session of a minute or more, the
+        app saves when it ended and how long it lasted. Shorter sessions are not saved.</li>
+    </ul>
+    <p>This information is stored only on your device. It is not sent to us or to anyone else, and it
+      is not synced to iCloud by the app.</p>
+
+    <h2>Apple Health</h2>
+    <p>With your permission, the app saves each finished session of a minute or more to Apple Health
+      as a Mind and Body workout. It does not save Mindful Minutes. The workout records when the
+      session started and ended and how long it lasted.</p>
+    <p>The app also asks for permission to read your heart rate. When you run a session on your Apple
+      Watch, the app reads your heart rate during the session, shows it on the watch, and saves it
+      with the workout. The iPhone has no heart rate sensor, so sessions run on the iPhone alone have
+      no heart rate. The app reads no other Health data.</p>
+    <p>Health data is never sent anywhere by the app, never used for advertising or marketing, and
+      never shared with or sold to anyone. You can turn the app's access on or off at any time in the
+      Health app, or under <strong>Settings › Privacy &amp; Security › Health</strong>.</p>
+
+    <h2>Live Activities</h2>
+    <p>While a session runs, the app can show the elapsed time on your Lock Screen and in the Dynamic
+      Island. This display is handled by iOS on your device and contains only the time your session
+      began. You can turn Live Activities off for the app in Settings.</p>
+
+    <h2>What the app does not do</h2>
+    <ul>
+      <li>It does not collect, transmit or sell personal information.</li>
+      <li>It does not use analytics, advertising, tracking or third-party code.</li>
+      <li>It does not require an account and does not connect to the internet.</li>
+    </ul>
+
+    <h2>Deleting your data</h2>
+    <p>Deleting Uninterrupted from your iPhone removes your session history and everything else the
+      app stored. Workouts already saved to Apple Health stay there until you delete them in the
+      Health app. Workouts from earlier versions of the app were saved as Mindful Minutes; those stay
+      until you delete them there too.</p>
+
+    <h2>Children</h2>
+    <p>The app does not collect information from anyone, including children.</p>
+
+    <h2>Changes to this policy</h2>
+    <p>If the app's handling of data changes, this page will be updated and the effective date above
+      will change.</p>
+
+    <h2>Contact</h2>
+    <p>Questions about this policy: <a href="mailto:corbin@uninterruptedmeditation.com">corbin@uninterruptedmeditation.com</a></p>
+
+    <footer><a href="../">Uninterrupted</a> · Corbin Hesse</footer>
+  </main>
+</body>
+</html>

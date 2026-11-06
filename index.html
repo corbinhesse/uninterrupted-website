@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Uninterrupted</title>
+  <meta name="description" content="Uninterrupted is a quiet, simple meditation app for iPhone and Apple Watch. Tap Begin, meditate, and tap Done when you're finished.">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f8f1ff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0b0820" media="(prefers-color-scheme: dark)">
+  <meta property="og:title" content="Uninterrupted">
+  <meta property="og:description" content="A quiet, simple meditation app for iPhone and Apple Watch.">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <style>
+    /* The app's sky (SkyBackground.swift): dawn in light mode, dusk in dark mode, each with a sun
+       glow centered 184px below the bottom edge. */
+    :root {
+      --sky: linear-gradient(#f8f1ff 0%, #fbeaf6 42%, #ffe8da 78%, #fff4ea 100%);
+      --glow-core: rgb(255 150 60 / 0.65);
+      --glow-halo: rgb(255 115 75 / 0.35);
+      --glow-edge: rgb(255 115 75 / 0);
+      --text: #2e3a3f;
+      --muted: #5f6366;
+      --accent: #6b3fa0;
+      --logo: #4a2a7a;
+      --tagline: #6b3fa0;
+      --icon-well: rgb(74 42 122 / 0.12);
+      --begin-glow-inner: rgb(255 170 120 / 0.35);
+      --begin-glow-outer: rgb(255 140 120 / 0.15);
+      --begin-glow-rest: 0.55;
+      --begin-glow-full: 0.85;
+      --begin-shadow: rgb(240 130 100 / 0.25);
+      --rule: rgb(107 63 160 / 0.14);
+      color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --sky: linear-gradient(#0b0820 0%, #24174f 34%, #4a2a82 62%, #8a3e8e 84%, #c45d8c 100%);
+        --glow-core: rgb(255 196 150 / 0.75);
+        --glow-halo: rgb(255 140 140 / 0.35);
+        --glow-edge: rgb(255 140 140 / 0);
+        --text: #ffffff;
+        --muted: rgb(255 255 255 / 0.72);
+        --accent: #ffb9c8;
+        --logo: #ffffff;
+        --tagline: #ffb9c8;
+        --icon-well: rgb(255 255 255 / 0.16);
+        --begin-glow-inner: rgb(255 170 120 / 0.28);
+        --begin-glow-outer: rgb(255 140 120 / 0.12);
+        --begin-glow-rest: 0.45;
+        --begin-glow-full: 0.75;
+        --begin-shadow: rgb(240 130 100 / 0.22);
+        --rule: rgb(255 255 255 / 0.16);
+        color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #f8f1ff;
+      color: var(--text);
+      font: 17px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    }
+    @media (prefers-color-scheme: dark) { body { background: #0b0820; } }
+    /* A fixed layer rather than background-attachment: fixed, which iOS Safari ignores. The sky
+       stays still while the page scrolls over it, as in the app. */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(circle 650px at 50% calc(100% + 184px),
+          var(--glow-core) 0, var(--glow-halo) 260px, var(--glow-edge) 455px),
+        var(--sky);
+    }
+    main { max-width: 760px; margin: 0 auto; padding: 56px 16px 64px; }
+    .hero { text-align: center; margin-bottom: 72px; }
+    /* The logo is a mask so it takes the app's logo color: deep plum on dawn, white on dusk. */
+    .hero .logo {
+      display: block;
+      width: 120px;
+      aspect-ratio: 337.03 / 151;
+      margin: 0 auto;
+      background: var(--logo);
+      -webkit-mask: url(logo.svg) center / contain no-repeat;
+      mask: url(logo.svg) center / contain no-repeat;
+    }
+    /* SF Rounded, as in the app. Only Safari knows ui-rounded; other browsers on a Mac with the
+       font installed find it by name, and the rest fall back to the system font. */
+    h1, .tagline, .intro { font-family: ui-rounded, "SF Pro Rounded", -apple-system, BlinkMacSystemFont, sans-serif; }
+    h1 { font-size: 2rem; font-weight: 600; margin: 24px 0 4px; color: var(--logo); }
+    .tagline { color: var(--tagline); font-weight: 400; margin: 0; }
+    p { margin: 0 0 14px; }
+    /* The rows of the app's introduction (IntroductionPage.swift, IntroductionView.swift): its
+       first page on the left, its Apple Health page on the right; one column on a phone. */
+    .intro {
+      display: grid;
+      justify-content: center;
+      gap: 18px 64px;
+      margin: 0;
+    }
+    @media (min-width: 720px) {
+      .intro { grid-template-columns: repeat(2, max-content); align-items: start; }
+    }
+    .intro ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; }
+    .intro li {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--logo);
+      font-weight: 700;
+      line-height: 1.3;
+    }
+    .icon {
+      flex: none;
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--icon-well);
+    }
+    /* Phosphor icons (icons/LICENSE.txt) in place of the app's SF Symbols, drawn as masks so they
+       take the logo color, like the logo. */
+    .icon::before {
+      content: "";
+      width: 24px;
+      height: 24px;
+      background: currentColor;
+      -webkit-mask: center / contain no-repeat;
+      mask: center / contain no-repeat;
+    }
+    .speaker-slash::before { -webkit-mask-image: url(icons/speaker-slash.svg); mask-image: url(icons/speaker-slash.svg); }
+    .cloud-slash::before { -webkit-mask-image: url(icons/cloud-slash.svg); mask-image: url(icons/cloud-slash.svg); }
+    .heart::before { -webkit-mask-image: url(icons/heart.svg); mask-image: url(icons/heart.svg); }
+    .pulse::before { -webkit-mask-image: url(icons/pulse.svg); mask-image: url(icons/pulse.svg); }
+    .hourglass::before { -webkit-mask-image: url(icons/hourglass-medium.svg); mask-image: url(icons/hourglass-medium.svg); }
+    /* The Begin button, as in the app (SunriseButtonStyle, BeginView.glow, CuppedLine.swift), on
+       a 10s cycle in place of the app's 6s. The button and its glow breathe in for 5s and out for
+       5s; in the last 1.5s the cup's line travels over the top and back down into the cup. The
+       icon is one path, cup + arch + cup: a dash as long as the cup (90.652) slides one lap
+       (cup + arch, 154.447) along it, landing on the second cup, which looks like the first.
+       Everything starts 7s into the cycle, so the first trip comes 1.5s after the page opens. */
+    .begin {
+      --diameter: 176px;
+      --cycle: 10s;
+      --phase: -7s;
+      position: relative;
+      width: var(--diameter);
+      height: var(--diameter);
+      margin: 72px auto 64px;
+    }
+    .begin .glow {
+      position: absolute;
+      inset: calc(var(--diameter) * -0.184); /* 1.368 times the button */
+      background: radial-gradient(circle farthest-corner,
+        var(--begin-glow-inner) 0, var(--begin-glow-outer) 50%, transparent 72%);
+      opacity: var(--begin-glow-rest);
+      animation: begin-glow var(--cycle) ease-in-out var(--phase) infinite;
+    }
+    .begin .button {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: linear-gradient(150deg, #6b3fa0 14%, #a8438f 54%, #d4566e 86%);
+      box-shadow: 0 15px 37px var(--begin-shadow);
+      animation: begin-breathe var(--cycle) ease-in-out var(--phase) infinite;
+    }
+    .begin svg { width: 60px; height: 60px; }
+    .begin path {
+      fill: none;
+      stroke: #fff;
+      stroke-width: 2.4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 90.652 400;
+      animation: begin-travel var(--cycle) var(--phase) infinite;
+    }
+    @keyframes begin-glow {
+      50% { transform: scale(1.08); opacity: var(--begin-glow-full); }
+    }
+    @keyframes begin-breathe {
+      50% { transform: scale(1.11); }
+    }
+    @keyframes begin-travel {
+      /* cubic-bezier(1/3, 0, 2/3, 1) is the app's smoothstep easing, t * t * (3 - 2t). */
+      0%, 85% { stroke-dashoffset: 0; animation-timing-function: cubic-bezier(0.333, 0, 0.667, 1); }
+      100% { stroke-dashoffset: -154.447; }
+    }
+    /* As in the app, Reduce Motion stops the breathing but not the line. */
+    @media (prefers-reduced-motion: reduce) {
+      .begin .glow, .begin .button { animation: none; }
+    }
+    /* The tagline's colors, under an icon in the same circle as the rows above. */
+    .launch {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      color: var(--tagline);
+    }
+    .launch p { margin: 0; }
+    a { color: var(--accent); }
+    footer { margin-top: 56px; text-align: center; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <header class="hero">
+      <span class="logo" role="img" aria-label="Uninterrupted logo"></span>
+      <h1>Uninterrupted Meditation</h1>
+      <p class="tagline">A meditation timer for iPhone and Apple Watch</p>
+    </header>
+
+    <!-- Each icon stands in for the app's SF Symbol: speaker.slash, icloud.slash, heart and
+         waveform.path.ecg. -->
+    <section class="intro">
+      <ul>
+        <li><span class="icon speaker-slash" aria-hidden="true"></span>No sounds, alerts, or guidance</li>
+        <li><span class="icon cloud-slash" aria-hidden="true"></span>No accounts or subscriptions</li>
+      </ul>
+      <ul>
+        <li><span class="icon heart" aria-hidden="true"></span>Save as Mind and Body Workouts</li>
+        <li><span class="icon pulse" aria-hidden="true"></span>Track Heart Rate using Apple Watch</li>
+      </ul>
+    </section>
+
+    <div class="begin" aria-hidden="true">
+      <div class="glow"></div>
+      <div class="button">
+        <svg viewBox="0 0 48 48">
+          <path d="M5 26C6 31 10 34 16 34C23 34 30 28 30 21A6 6 0 0 0 18 21C18 28 25 34 32 34C38 34 42 31 43 26
+                   A19.0948 19.0948 0 1 0 5 26
+                   C6 31 10 34 16 34C23 34 30 28 30 21A6 6 0 0 0 18 21C18 28 25 34 32 34C38 34 42 31 43 26"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="launch">
+      <span class="icon hourglass" aria-hidden="true"></span>
+      <p>Coming soon to the App Store</p>
+    </div>
+
+    <footer><a href="privacy/">Privacy Policy</a></footer>
+  </main>
+</body>
+</html>
